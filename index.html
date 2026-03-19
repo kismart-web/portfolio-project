@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        header {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-top: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            background: #555;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: yellow;
+        }
+
+        section {
+            padding: 30px;
+        }
+
+        .projects {
+            background: white;
+        }
+
+        .project {
+            border: 1px solid #add;
+            padding: 15px;
+            margin: 10px 0;
+            transition: 0.3s;
+        }
+
+        .project:hover {
+            background: #f9f9f9;
+            transform: scale(1.02);
+        }
+
+        .main-img {
+             width: 100%;
+             max-height: 400px;
+             max-width: 500px;   /* limits the size */
+             height: auto;       /* keeps full image visible */
+             border-radius: 10px;
+             margin: 0 auto 10px; /* centers the image */
+             display: block;     /* ensures centering works */
+             transition: transform 0.3s ease;
+        }
+
+        .main-img:hover {
+            transform: scale(1.02);
+        }
+
+        .thumbnails {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .thumbnails img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .thumbnails img:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        .thumbnails img.active {
+            border: 2px solid #007BFF;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        button {
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid #333;
+            cursor: pointer;
+            margin: 2px;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f1f1f1;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            color: #333;
+            margin: 0 10px;
+            font-size: 24px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #00aced;
+            transform: scale(1.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-img {
+                width: 90px;
+                height: 90px;
+            }
+
+            section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="images/ksm12.jpg" class="profile-img" alt="My Photo">
+    <h1>DERICK KISMART</h1>
+    <p>Web Developer</p>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<section id="about" class="about">
+    <h1>About</h1>
+    <p>I am an IT student learning web development. I enjoy building websites and learning new technologies.</p>
+</section>
+
+<section id="skills" class="skills">
+    <h1>Skills</h1>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>Basic JavaScript</li>
+        <li>Database Basics</li>
+    </ul>
+</section>
+
+  <section id="projects" class="projects">
+    <h2>Projects</h2>
+
+    <!-- Library System with gallery -->
+    <div class="project">
+        <h3>Library System</h3>
+        <img src="images/libproj1.jpeg" id="libraryMainImage" class="main-img" alt="Library cover image">
+        <div class="thumbnails">
+            <img src="images/libproj1.jpeg" alt="Library image 1" onclick="changeLibraryImage(this)">
+            <img src="images/libproj2.jpeg" alt="Library image 2" onclick="changeLibraryImage(this)">
+            <img src="images/libproj3.jpeg" alt="Library image 3" onclick="changeLibraryImage(this)">
+        </div>
+        <p>A simple system designed for managing books.</p>
+    </div>
+
+    <!-- Hotel Management System with gallery -->
+    <div class="project">
+        <h3>Hotel Management System</h3>
+        <img src="images/hotproj2.jpeg" id="mainImage" class="main-img" alt="Hotel cover image">
+        <div class="thumbnails">
+            <img src="images/hotproj2.jpeg" alt="hotel image 1" onclick="changeImage(this)">
+            <img src="images/hotproj3.jpeg" alt="hotel image 2" onclick="changeImage(this)">
+            <img src="images/hotproj4.jpeg" alt="hotel image 3" onclick="changeImage(this)">
+            <img src="images/hotproj5.jpeg" alt="hotel image 4" onclick="changeImage(this)">
+        </div>
+        <p>The system enables customers to access services online, book rooms, and automates payments.</p>
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <form>
+        <input type="text" placeholder="Your Name" required><br><br>
+        <input type="email" placeholder="Your Email" required><br><br>
+        <textarea placeholder="Your Message" required></textarea><br><br>
+        <button type="submit">Send</button>
+    </form>
+</section>
+
+<script>
+function changeLibraryImage(thumbnail) {
+    let main = document.getElementById('libraryMainImage');
+    main.src = thumbnail.src;
+
+    let thumbs = document.querySelectorAll('#libraryMainImage + .thumbnails img');
+    thumbs.forEach(img => img.classList.remove('active'));
+
+    thumbnail.classList.add('active');
+}
+
+function changeImage(thumbnail) {
+    let main = document.getElementById('mainImage');
+    main.src = thumbnail.src;
+
+    let thumbs = document.querySelectorAll('#mainImage + .thumbnails img');
+    thumbs.forEach(img => img.classList.remove('active'));
+
+    thumbnail.classList.add('active');
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#libraryMainImage + .thumbnails img').classList.add('active');
+    document.querySelector('#mainImage + .thumbnails img').classList.add('active');
+    document.getElementById("year").textContent = new Date().getFullYear();
+});
+</script>
+
+<footer>
+    <p>&copy; <span id="year"></span> Derick Kismart. All rights reserved.</p>
+    <div class="social-icons">
+        <a href="https://github.com/kismart-web/"
+              target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/derick-kismart-2a362339a/" 
+              target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61575619583607"
+              target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://instagram.com/the.persona254?igsh=MWswc2p44c2x5NnBmNg=="
+              target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://tiktok.com/@kismart79"
+              target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+</footer>
+
+</body>
+</html>
