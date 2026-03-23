@@ -1,293 +1,465 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f4f4f4;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Derick Kismart Portfolio</title>
 
-        header {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 50px;
-        }
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-        .profile-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin-top: 10px;
-        }
+  <!-- SEO / Social -->
+  <meta name="description" content="Portfolio of Derick Kismart, IT student and web developer. Showcasing modern projects and skills.">
+  <meta property="og:title" content="Derick Kismart Portfolio">
+  <meta property="og:description" content="Web developer portfolio showcasing projects and skills.">
+  <meta property="og:image" content="images/ksm12.jpg">
+  <meta property="og:type" content="website">
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            background: #555;
-            margin: 0;
-            padding: 0;
-        }
+  <style>
+    :root {
+      --bg: #f4f4f4;
+      --text: #222;
+      --primary: #007BFF;
+      --accent: #00C6FF;
+      --muted: #ddd;
+      --card-border: #add;
+    }
 
-        nav ul li {
-            margin: 10px;
-        }
+    /* Base */
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    body.dark {
+      --bg: #0f1115;
+      --text: #e6eef8;
+      --primary: #00C6FF;
+      --accent: #007BFF;
+      background: var(--bg);
+      color: var(--text);
+    }
 
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            transition: 0.3s;
-        }
+    /* Hero */
+    header.hero {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      text-align: center;
+      padding: 56px 20px;
+    }
+    .hero-content { max-width: 1000px; margin: 0 auto; }
+    .profile-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(255,255,255,0.18);
+      display: inline-block;
+    }
+    header h1 { margin: 14px 0 6px; font-size: 28px; letter-spacing: 1px; }
+    header p { margin: 0 0 14px; opacity: 0.95; }
 
-        nav ul li a:hover {
-            color: yellow;
-        }
+    .hero-buttons .btn {
+      display: inline-block;
+      margin: 8px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      background: white;
+      color: var(--primary);
+    }
+    .hero-buttons .btn-accent {
+      background: rgba(255,255,255,0.12);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
 
-        section {
-            padding: 30px;
-        }
+    /* Nav */
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      background: #555;
+      margin: 0;
+      padding: 8px 0;
+      gap: 6px;
+    }
+    nav ul li { margin: 0; }
+    nav ul li a, #darkModeToggle {
+      color: white;
+      text-decoration: none;
+      transition: color .2s ease;
+      padding: 8px 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    nav ul li a:hover, #darkModeToggle:hover { color: #ffd54a; }
 
-        .projects {
-            background: white;
-        }
+    /* Layout sections */
+    section { padding: 28px 20px; max-width: 1000px; margin: 0 auto; }
+    .projects { background: white; padding: 18px; border-radius: 10px; }
+    .project { border: 1px solid var(--card-border); padding: 14px; margin: 12px 0; border-radius: 8px; transition: transform .18s ease, box-shadow .18s ease; }
+    .project:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
 
-        .project {
-            border: 1px solid #add;
-            padding: 15px;
-            margin: 10px 0;
-            transition: 0.3s;
-        }
+    /* Images & gallery */
+    .main-img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto 12px;
+      transition: opacity .45s ease;
+      opacity: 1;
+    }
+    .fade-out { opacity: 0; }
+    .thumbnails { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; justify-content: center; }
+    .thumbnails img {
+      width: 70px; height: 70px; object-fit: cover; border-radius: 8px; cursor: pointer;
+      border: 2px solid transparent; transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .thumbnails img:hover { transform: scale(1.06); }
+    .thumbnails img.active { border-color: var(--primary); box-shadow: 0 8px 18px rgba(0,123,255,0.12); }
 
-        .project:hover {
-            background: #f9f9f9;
-            transform: scale(1.02);
-        }
+    /* Tags & text */
+    .tags { font-size: .86rem; color: var(--primary); margin-bottom: 8px; font-weight:600; }
+    .project p { margin: 6px 0; line-height: 1.45; }
 
-        .main-img {
-             width: 100%;
-             max-height: 400px;
-             max-width: 500px;   /* limits the size */
-             height: auto;       /* keeps full image visible */
-             border-radius: 10px;
-             margin: 0 auto 10px; /* centers the image */
-             display: block;     /* ensures centering works */
-             transition: transform 0.3s ease;
-        }
+    /* Skills */
+    .skill { margin-bottom: 18px; }
+    .progress-bar { background: var(--muted); border-radius: 20px; overflow: hidden; height: 20px; }
+    .progress { background: linear-gradient(90deg, var(--primary), var(--accent)); height: 100%; width: 0; border-radius: 20px; transition: width 1.5s ease-in-out; }
 
-        .main-img:hover {
-            transform: scale(1.02);
-        }
+    /* Form */
+    form input, form textarea { width: 100%; padding: 10px; margin: 6px 0; border-radius: 6px; border: 1px solid #cfcfcf; box-sizing: border-box; font-family: inherit; }
+    .form-row { margin-bottom: 10px; }
+    .form-status { margin-top: 8px; font-weight:600; }
 
-        .thumbnails {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
+    /* Buttons */
+    button, .btn { font-family: inherit; }
 
-        .thumbnails img {
-            width: 70px;
-            height: 70px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
+    /* Footer */
+    footer { text-align: center; padding: 18px; background: #f1f1f1; color: #333; font-size: .9rem; margin-top: 18px; }
+    .social-icons a { color: #333; margin: 0 8px; font-size: 20px; text-decoration: none; }
+    .social-icons a:hover { color: var(--accent); transform: scale(1.08); }
 
-        .thumbnails img:hover {
-            transform: scale(1.1);
-            opacity: 0.8;
-        }
-
-        .thumbnails img.active {
-            border: 2px solid #007BFF;
-        }
-
-        form input, form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-        }
-
-        button {
-            background: #333;
-            color: white;
-            padding: 10px 20px;
-            border: 2px solid #333;
-            cursor: pointer;
-            margin: 2px;
-        }
-
-        button:hover {
-            background: #555;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #f1f1f1;
-            color: #333;
-            font-size: 0.9rem;
-        }
-
-        .social-icons {
-            margin-top: 10px;
-        }
-
-        .social-icons a {
-            color: #333;
-            margin: 0 10px;
-            font-size: 24px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .social-icons a:hover {
-            color: #00aced;
-            transform: scale(1.2);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .profile-img {
-                width: 90px;
-                height: 90px;
-            }
-
-            section {
-                padding: 15px;
-            }
-        }
-    </style>
+    /* Responsive */
+    @media (max-width: 768px) {
+      .profile-img { width: 110px; height: 110px; }
+      nav ul { flex-wrap: wrap; gap: 4px; }
+      .main-img { max-width: 100%; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <img src="images/ksm12.jpg" class="profile-img" alt="My Photo">
-    <h1>DERICK KISMART</h1>
-    <p>Web Developer</p>
-</header>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-content">
+      <img src="images/ksm12.jpg" class="profile-img" alt="Derick Kismart">
+      <h1>DERICK KISMART</h1>
+      <p>Building modern web solutions with clean code.</p>
+      <div class="hero-buttons">
+        <a href="resume.pdf" class="btn">Download Resume</a>
+        <a href="#projects" class="btn btn-accent">View Projects</a>
+      </div>
+    </div>
+  </header>
 
-<nav>
+  <!-- NAV -->
+  <nav>
     <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button></li>
     </ul>
-</nav>
+  </nav>
 
-<section id="about" class="about">
+  <!-- ABOUT -->
+  <section id="about">
     <h1>About</h1>
-    <p>I am an IT student learning web development. I enjoy building websites and learning new technologies.</p>
-</section>
+    <p>I am an EXPERT in web development. I enjoy building websites and learning new technologies.</p>
+  </section>
 
-<section id="skills" class="skills">
+  <!-- SKILLS -->
+  <section id="skills">
     <h1>Skills</h1>
-    <ul>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>Basic JavaScript</li>
-        <li>Database Basics</li>
-    </ul>
-</section>
+    <div class="skill">
+      <p>HTML</p>
+      <div class="progress-bar"><div class="progress" data-progress="90"></div></div>
+    </div>
+    <div class="skill">
+      <p>CSS</p>
+      <div class="progress-bar"><div class="progress" data-progress="85"></div></div>
+    </div>
+    <div class="skill">
+      <p>JavaScript (Basic)</p>
+      <div class="progress-bar"><div class="progress" data-progress="60"></div></div>
+    </div>
+    <div class="skill">
+      <p>Database Basics</p>
+      <div class="progress-bar"><div class="progress" data-progress="70"></div></div>
+    </div>
+  </section>
 
+  <!-- PROJECTS -->
   <section id="projects" class="projects">
     <h2>Projects</h2>
 
-    <!-- Library System with gallery -->
     <div class="project">
-        <h3>Library System</h3>
-        <img src="images/libproj1.jpeg" id="libraryMainImage" class="main-img" alt="Library cover image">
-        <div class="thumbnails">
-            <img src="images/libproj1.jpeg" alt="Library image 1" onclick="changeLibraryImage(this)">
-            <img src="images/libproj2.jpeg" alt="Library image 2" onclick="changeLibraryImage(this)">
-            <img src="images/libproj3.jpeg" alt="Library image 3" onclick="changeLibraryImage(this)">
-        </div>
-        <p>A simple system designed for managing books.</p>
+      <h3>Library System</h3>
+      <img src="images/libproj1.jpeg" id="libraryMainImage" class="main-img" loading="lazy" alt="Library cover image">
+      <div class="tags">HTML | CSS | Database</div>
+
+      <div class="thumbnails" role="list">
+        <img src="images/libproj1.jpeg" alt="Library thumbnail 1" data-target="libraryMainImage" loading="lazy" role="listitem">
+        <img src="images/libproj2.jpeg" alt="Library thumbnail 2" data-target="libraryMainImage" loading="lazy" role="listitem">
+        <img src="images/libproj3.jpeg" alt="Library thumbnail 3" data-target="libraryMainImage" loading="lazy" role="listitem">
+      </div>
+
+      <p><strong>Problem:</strong> Managing books manually was inefficient.</p>
+      <p><strong>Solution:</strong> Built a system to track, borrow, and return books.</p>
+      <p><strong>Tools:</strong> HTML, CSS, MySQL.</p>
+      <p><strong>Outcome:</strong> Reduced errors and improved efficiency.</p>
     </div>
 
-    <!-- Hotel Management System with gallery -->
     <div class="project">
-        <h3>Hotel Management System</h3>
-        <img src="images/hotproj2.jpeg" id="mainImage" class="main-img" alt="Hotel cover image">
-        <div class="thumbnails">
-            <img src="images/hotproj2.jpeg" alt="hotel image 1" onclick="changeImage(this)">
-            <img src="images/hotproj3.jpeg" alt="hotel image 2" onclick="changeImage(this)">
-            <img src="images/hotproj4.jpeg" alt="hotel image 3" onclick="changeImage(this)">
-            <img src="images/hotproj5.jpeg" alt="hotel image 4" onclick="changeImage(this)">
-        </div>
-        <p>The system enables customers to access services online, book rooms, and automates payments.</p>
-    </div>
-</section>
+      <h3>Hotel Management System</h3>
+      <img src="images/hotproj2.jpeg" id="mainImage" class="main-img" loading="lazy" alt="Hotel cover image">
+      <div class="tags">HTML | CSS | JS | Database</div>
 
-<section id="contact" class="contact">
+      <div class="thumbnails" role="list">
+        <img src="images/hotproj2.jpeg" alt="Hotel thumbnail 1" data-target="mainImage" loading="lazy" role="listitem">
+        <img src="images/hotproj3.jpeg" alt="Hotel thumbnail 2" data-target="mainImage" loading="lazy" role="listitem">
+        <img src="images/hotproj4.jpeg" alt="Hotel thumbnail 3" data-target="mainImage" loading="lazy" role="listitem">
+        <img src="images/hotproj5.jpeg" alt="Hotel thumbnail 4" data-target="mainImage" loading="lazy" role="listitem">
+      </div>
+
+      <p><strong>Problem:</strong> Booking and payments were manual and slow.</p>
+      <p><strong>Solution:</strong> Developed an online booking and payment system.</p>
+      <p><strong>Tools:</strong> HTML, CSS, JavaScript, MySQL.</p>
+      <p><strong>Outcome:</strong> Automated reservations and improved customer experience.</p>
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
     <h2>Contact Me</h2>
-    <form>
-        <input type="text" placeholder="Your Name" required><br><br>
-        <input type="email" placeholder="Your Email" required><br><br>
-        <textarea placeholder="Your Message" required></textarea><br><br>
+    <form id="contactForm">
+      <div class="form-row">
+        <input type="text" name="user_name" placeholder="Your Name" required>
+      </div>
+      <div class="form-row">
+        <input type="email" name="user_email" placeholder="Your Email" required>
+      </div>
+      <div class="form-row">
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      </div>
+      <div class="form-row">
         <button type="submit">Send</button>
+      </div>
+      <div id="formStatus" class="form-status" aria-live="polite"></div>
     </form>
-</section>
+  </section>
 
-<script>
-function changeLibraryImage(thumbnail) {
-    let main = document.getElementById('libraryMainImage');
-    main.src = thumbnail.src;
-
-    let thumbs = document.querySelectorAll('#libraryMainImage + .thumbnails img');
-    thumbs.forEach(img => img.classList.remove('active'));
-
-    thumbnail.classList.add('active');
-}
-
-function changeImage(thumbnail) {
-    let main = document.getElementById('mainImage');
-    main.src = thumbnail.src;
-
-    let thumbs = document.querySelectorAll('#mainImage + .thumbnails img');
-    thumbs.forEach(img => img.classList.remove('active'));
-
-    thumbnail.classList.add('active');
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('#libraryMainImage + .thumbnails img').classList.add('active');
-    document.querySelector('#mainImage + .thumbnails img').classList.add('active');
-    document.getElementById("year").textContent = new Date().getFullYear();
-});
-</script>
-
-<footer>
+  <!-- FOOTER -->
+  <footer>
     <p>&copy; <span id="year"></span> Derick Kismart. All rights reserved.</p>
-    <div class="social-icons">
-        <a href="https://github.com/kismart-web/"
-              target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/derick-kismart-2a362339a/" 
-              target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://www.facebook.com/profile.php?id=61575619583607"
-              target="_blank"><i class="fab fa-facebook"></i></a>
-        <a href="https://instagram.com/the.persona254?igsh=MWswc2p44c2x5NnBmNg=="
-              target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://tiktok.com/@kismart79"
-              target="_blank"><i class="fab fa-tiktok"></i></a>
+    <div class="social-icons" aria-hidden="false">
+      <a href="https://github.com/kismart-web/" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/derick-kismart-2a362339a/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=61575619583607" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+      <a href="https://instagram.com/the.persona254" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      <a href="https://tiktok.com/@kismart79" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
     </div>
-</footer>
+  </footer>
 
+  <!-- EmailJS SDK (for contact form) -->
+  <script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+
+  <script>
+    /***********************
+     * Utility: fadeImage
+     * Smoothly fades main image out, swaps src, fades back in.
+     ***********************/
+    function fadeImage(mainImgEl, newSrc) {
+      if (!mainImgEl || !newSrc) return;
+
+      // If already showing the same absolute URL, do nothing
+      if (mainImgEl.src === newSrc) return;
+
+      // Remove any previous transitionend listener by cloning element reference
+      const onTransitionEnd = function (e) {
+        if (e.propertyName !== 'opacity') return;
+        mainImgEl.removeEventListener('transitionend', onTransitionEnd);
+        // swap src
+        mainImgEl.src = newSrc;
+        // force reflow so removing class triggers transition
+        void mainImgEl.offsetWidth;
+        mainImgEl.classList.remove('fade-out');
+      };
+
+      // Add listener and start fade-out
+      mainImgEl.addEventListener('transitionend', onTransitionEnd);
+      mainImgEl.classList.add('fade-out');
+    }
+
+    /***********************
+     * Gallery: delegated click handler
+     * Thumbnails have data-target attribute pointing to main image id.
+     ***********************/
+    document.addEventListener('click', function (e) {
+      const clicked = e.target;
+      if (!clicked.matches('.thumbnails img')) return;
+
+      const project = clicked.closest('.project');
+      if (!project) return;
+
+      // Determine main image element
+      const targetId = clicked.getAttribute('data-target');
+      let mainImg = targetId ? document.getElementById(targetId) : project.querySelector('.main-img');
+      if (!mainImg) return;
+
+      // Update active thumbnail visuals
+      project.querySelectorAll('.thumbnails img').forEach(img => img.classList.remove('active'));
+      clicked.classList.add('active');
+
+      // Use absolute URL from clicked.src for consistency
+      const newSrc = clicked.src;
+
+      // Swap with fade
+      fadeImage(mainImg, newSrc);
+    });
+
+    /***********************
+     * Initialize thumbnails and ensure main images match first thumbnail
+     ***********************/
+    function initGalleries() {
+      document.querySelectorAll('.project').forEach(project => {
+        const firstThumb = project.querySelector('.thumbnails img');
+        const mainImg = project.querySelector('.main-img');
+        if (firstThumb) {
+          // mark active
+          firstThumb.classList.add('active');
+          // ensure main image src matches first thumbnail (use absolute src)
+          if (mainImg && mainImg.src !== firstThumb.src) {
+            mainImg.src = firstThumb.src;
+          }
+        }
+      });
+    }
+
+    /***********************
+     * Skills animation (IntersectionObserver)
+     ***********************/
+    function animateSkillsOnView() {
+      const skills = document.querySelectorAll('.progress');
+      if (!('IntersectionObserver' in window)) {
+        // fallback: animate immediately
+        skills.forEach(el => el.style.width = (el.dataset.progress || '0') + '%');
+        return;
+      }
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const value = el.getAttribute('data-progress') || '0';
+            el.style.width = value + '%';
+            obs.unobserve(el);
+          }
+        });
+      }, { threshold: 0.35 });
+      skills.forEach(s => observer.observe(s));
+    }
+
+    /***********************
+     * Dark mode toggle (persist in localStorage)
+     ***********************/
+    const darkToggle = document.getElementById('darkModeToggle');
+    function applySavedTheme() {
+      try {
+        const saved = localStorage.getItem('dk_theme');
+        if (saved === 'dark') document.body.classList.add('dark');
+      } catch (e) { /* ignore */ }
+    }
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      try {
+        localStorage.setItem('dk_theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+      } catch (e) {}
+    });
+
+    /***********************
+     * Contact form (EmailJS)
+     * Replace the placeholders with your EmailJS keys:
+     * - YOUR_PUBLIC_KEY
+     * - YOUR_SERVICE_ID
+     * - YOUR_TEMPLATE_ID
+     ***********************/
+    (function () {
+      // Initialize EmailJS - replace with your public key
+      try {
+        emailjs.init('YOUR_PUBLIC_KEY');
+      } catch (err) {
+        // emailjs may not be available if script blocked; we'll handle on submit
+      }
+
+      const form = document.getElementById('contactForm');
+      const statusEl = document.getElementById('formStatus');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        statusEl.textContent = 'Sending...';
+
+        // Ensure emailjs is available
+        if (typeof emailjs === 'undefined' || !emailjs.sendForm) {
+          statusEl.textContent = 'Email service not loaded. Please try again later.';
+          return;
+        }
+
+        // Replace these with your EmailJS service/template IDs
+        const SERVICE_ID = 'YOUR_SERVICE_ID';
+        const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
+        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, this)
+          .then(function () {
+            statusEl.textContent = 'Message sent successfully. Thank you!';
+            form.reset();
+          }, function (error) {
+            console.error('EmailJS error:', error);
+            statusEl.textContent = 'Error sending message. Please try again later.';
+          });
+      });
+    })();
+
+    /***********************
+     * DOMContentLoaded: initialize everything
+     ***********************/
+    window.addEventListener('DOMContentLoaded', function () {
+      // Galleries
+      initGalleries();
+
+      // Skills
+      animateSkillsOnView();
+
+      // Theme
+      applySavedTheme();
+
+      // Year in footer
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    });
+  </script>
 </body>
 </html>
